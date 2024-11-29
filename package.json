@@ -2,8 +2,9 @@
   "name": "backendantonychatbot",
   "version": "1.0.0",
   "description": "Backend devlab chatbot for antony",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "",
     "test": "test",
     "build": ""
