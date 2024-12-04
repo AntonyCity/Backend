@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//RH people
+model User {
+  id Int @id @default(autoincrement())
+  name String @unique
+  password String
+  token String?
+  role String @default("CLASSIC")
+  offers Offer[]
+}
+// role : CLASSIC -> can add and delete CV, ADMIN -> can also post and delete offers, SUPER_ADMIN -> can also create and supress User
+
+//Job opportunity
+model Offer {
+  id Int @id @default(autoincrement())
+  filled Boolean @default(false)
+  title String
+  content String
+  published DateTime
+  userId Int
+  publisher User @relation(fields: [userId], references: [id])
+  matchs Match[] 
+}
+
+//CV loadded in the database
+model Candidate {
+  id Int @id @default(autoincrement())
+  name String
+  summary String
+  cvfile String
+  phone Int?
+  email String?
+  cvPath String
+  matches Match[]
+}
+
+// To associate each CV with each offer
+model Match {
+  id Int @id @default(autoincrement())
+  candidateId Int
+  profile Candidate @relation(fields: [candidateId], references: [id])
+  compatibility Int?
+  offerId Int
+  offer Offer @relation(fields: [offerId], references: [id])
+}
