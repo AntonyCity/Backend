@@ -24,4 +24,5 @@ app.use("/", router);
 
 app.listen(port, () => {
     console.log('Server app listening on port ' + port);
+    console.log('http://localhost:8003/')
 });
