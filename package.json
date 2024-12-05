@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch index.js",
+    "dev": "node index.js",
     "uf": "node ./fixtures/userFixture.js",
     "test": "test",
     "build": "node ./fixtures/userFixture.js && node index.js"
