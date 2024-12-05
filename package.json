@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Backend devlab chatbot for antony",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "",
+    "dev": "node --watch index.js",
+    "uf": "node ./fixtures/userFixture.js",
     "test": "test",
-    "build": ""
+    "build": "node index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",
