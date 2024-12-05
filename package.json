@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "node index.js",
     "uf": "node ./fixtures/userFixture.js",
+    "of":"node ./fixtures/offreFixture.js",
+    "allf":"node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
     "test": "test",
     "build": "node ./fixtures/userFixture.js && node index.js"
   },
@@ -25,9 +27,6 @@
     "openai": "^4.71.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.0",
-    "@commitlint/config-conventional": "^19.6.0",
-    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "prisma": "^5.22.0"
   }
