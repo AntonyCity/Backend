@@ -28,6 +28,7 @@ model Offer {
   title String
   content String
   published DateTime
+  updatedAt DateTime?
   userId Int
   publisher User @relation(fields: [userId], references: [id])
   matchs Match[] 
