@@ -3,22 +3,29 @@
   "version": "1.0.0",
   "description": "Backend devlab chatbot for antony",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "",
+    "dev": "node index.js",
+    "uf": "node ./fixtures/userFixture.js",
     "test": "test",
-    "build": ""
+    "build": "node ./fixtures/userFixture.js && node index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",
   "dependencies": {
     "@pinecone-database/pinecone": "^4.0.0",
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "openai": "^4.71.1"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "prisma": "^5.22.0"
   }
 }
