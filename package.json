@@ -10,7 +10,7 @@
     "of":"node ./fixtures/offreFixture.js",
     "allf":"node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
     "test": "test",
-    "build": "node ./fixtures/userFixture.js && node index.js"
+    "build": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js && node index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",
