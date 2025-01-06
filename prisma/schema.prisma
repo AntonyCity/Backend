@@ -37,6 +37,7 @@ model Offer {
 //CV loadded in the database
 model Candidate {
   id Int @id @default(autoincrement())
+  uniId String @unique
   name String
   summary String @db.Text
   cvfile String?
