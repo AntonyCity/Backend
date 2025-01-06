@@ -38,11 +38,12 @@ model Offer {
 model Candidate {
   id Int @id @default(autoincrement())
   name String
-  summary String
-  cvfile String
-  phone Int?
+  summary String @db.Text
+  cvfile String?
+  phone String?
+  tags String
   email String?
-  cvPath String
+  cvPath String?
   matches Match[]
 }
 
