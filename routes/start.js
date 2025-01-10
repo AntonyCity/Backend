@@ -1,5 +1,6 @@
 import express from 'express';
 import AuthController from '../controllers/authController.js';
+import UserController from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -14,6 +15,10 @@ router.get('/', (req, res) => {
 
 /* Authentification route */
 router.post('/login', AuthController.login);
+
+/* User route */
+router.get('/users', UserController.getUsers);
+router.post('/users', UserController.createUser);
 
 /* 404 */ 
 
