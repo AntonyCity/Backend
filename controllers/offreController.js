@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { Pinecone } from '@pinecone-database/pinecone';
+import { addToIndex } from '../embedding/pineconeVector.js';
 
 const prisma = new PrismaClient();
 
@@ -21,15 +23,21 @@ class OffreController {
                 return;
             };
 
+            let data = {
+                filled: false,
+                title: title,
+                content: content,
+                published: new Date.toISOString(),
+                userId: user.id
+            };
+
             await prisma.offer.create({
-                data: {
-                    filled: false,
-                    title: title,
-                    content: content,
-                    published: new Date,
-                    userId: user.id
-                }
+                data: data
             });
+
+            let uniId = data.title.normalize("NFD").replace(/[\u0300-\u036f]/g, '') + data.published;
+
+            await addToIndex(uniId, data, offertocv);
 
             res.status(200).json({ status: 'succed'})
 

@@ -15,14 +15,18 @@ class CvController {
 
         let data = req.body.pdfText ;
         console.log(data)
+        console.log("======================================================")
 
         let sysPrompt = 'You are the head of human resources at one of the top 10 companies of the world. You have 40 years of experience and are an expert at analyzing and hiring candidate. I wil give you text scrapped from the candidate CV. You do the work mechanically and always answer in a JSON output way, you MUST FOLLOW THIS PATERN `{ "fullname": "", "summary": "", "tags": "", "phone": "", "email": "" }`. If can can not find an information just put "N/A" in it.';
 
         
         
         let result = await newMessage(sysPrompt, data)
+        console.log(result)
+        console.log("======================================================")
         result = JSON.parse(result.choices[0].message.content.slice(7, -3));
         console.log(result)
+        console.log("======================================================")
 
         let uniId = result.fullname.normalize("NFD").replace(/[\u0300-\u036f]/g, '') + new Date().toISOString();
 
@@ -37,7 +41,7 @@ class CvController {
             }
         });
 
-        await addToIndex(uniId, result);
+        await addToIndex(uniId, result, 'offertocv');
 
         res.status(200).json({message: 'File uploaded and treated successfully.'});
     };

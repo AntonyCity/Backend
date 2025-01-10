@@ -9,7 +9,7 @@
     "uf": "node ./fixtures/userFixture.js",
     "of": "node ./fixtures/offreFixture.js",
     "allf": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
-    "purge": "npx prisma migrate reset && npm run allf",
+    "purge": "npx prisma migrate reset --force && npm run allf",
     "test": "test",
     "build": "npm run purge && node index.js"
   },

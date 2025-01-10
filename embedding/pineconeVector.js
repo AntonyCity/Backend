@@ -17,13 +17,15 @@ const pc = new Pinecone({
 //cosine
 //1536
 
-async function addToIndex(id, data) {
+async function addToIndex(id, data, inx) {
     const results = [];
-
+    let formated = data;
+    console.log(typeof formated)
+    console.log(formated)
     try {
         const embedding = await openai.embeddings.create({
             model: "text-embedding-3-small",
-            input: JSON.stringify(data),
+            input: JSON.stringify(formated),
             encoding_format: "float",
         });
 
@@ -41,7 +43,7 @@ async function addToIndex(id, data) {
 
         console.log("All embeddings:", results);
 
-        const index = pc.Index('offertocv');
+        const index = pc.Index(inx);
         await index.upsert(results);
 
         console.log("Data upserted successfully.");
@@ -49,6 +51,10 @@ async function addToIndex(id, data) {
         console.error("Error while adding to index:", error);
     }
 }
+
+async function searchCvForOffer(offerUniId){
+
+};
 
 
 export { addToIndex };

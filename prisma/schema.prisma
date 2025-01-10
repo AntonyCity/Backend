@@ -27,6 +27,7 @@ model Offer {
   filled Boolean @default(false)
   title String
   content String
+  tags String ?
   published DateTime
   updatedAt DateTime?
   userId Int
