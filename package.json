@@ -2,10 +2,10 @@
   "name": "backendantonychatbot",
   "version": "1.0.0",
   "description": "Backend devlab chatbot for antony",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "node index.js",
+    "start": "node src/index.js",
     "uf": "node ./fixtures/userFixture.js",
     "of": "node ./fixtures/offreFixture.js",
     "allf": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
@@ -13,7 +13,7 @@
     "test": "test",
     "prisma:migrate": "npx prisma migrate deploy",
     "prisma:generate": "npx prisma generate",
-    "build": "npm run purge && node index.js"
+    "build": "npm run purge && node src/index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",
