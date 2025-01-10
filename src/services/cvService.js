@@ -1,4 +1,4 @@
-import prisma from '../prisma/prismaClient.js';
+import prisma from '../../prisma/prismaClient.js';
 import { newMessage } from '../llm/openaiApi.js';
 import { addToIndex } from '../embedding/pineconeVector.js';
 

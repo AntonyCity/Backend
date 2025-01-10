@@ -1,4 +1,4 @@
-import prisma from '../prisma/prismaClient.js';
+import prisma from '../../prisma/prismaClient.js';
 import { comparePassword } from '../utils/bcrypt.js';
 import { generateJwtToken } from '../utils/jwt.js';
 

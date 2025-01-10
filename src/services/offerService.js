@@ -1,4 +1,4 @@
-import prisma from '../prisma/prismaClient.js';
+import prisma from '../../prisma/prismaClient.js';
 import { addToIndex } from '../embedding/pineconeVector.js';
 
 class OfferService {

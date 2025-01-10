@@ -1,4 +1,4 @@
-import prisma from '../prisma/prismaClient.js';
+import prisma from '../../prisma/prismaClient.js';
 import { hashPassword } from '../utils/bcrypt.js';
 // import { genPw } from '../utils/generatePW.js';
 

@@ -6,7 +6,7 @@ import cors from 'cors';
 import router from "./routes/routes.js"; // the routes 
 import { verifyJwtToken } from './middelwares/middelware.js';
 import { OpenAI } from 'openai'; 
-import prisma from './prisma/prismaClient.js';
+import prisma from '../prisma/prismaClient.js';
 
 // ========================================================================================================
 // load the environment variables
