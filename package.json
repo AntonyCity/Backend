@@ -8,7 +8,9 @@
     "dev": "node index.js",
     "uf": "node ./fixtures/userFixture.js",
     "test": "test",
-    "build": "node ./fixtures/userFixture.js && node index.js"
+    "build": "node ./fixtures/userFixture.js && node index.js",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",

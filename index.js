@@ -5,6 +5,7 @@ import express from 'express';
 import cors from 'cors'; 
 import router from "./routes/start.js"; // the routes 
 import { OpenAI } from 'openai'; 
+import prisma from './prisma/prismaClient.js';
 
 // ========================================================================================================
 // load the environment variables
@@ -21,6 +22,11 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", router);
+
+process.on('SIGINT', async () => {
+    await prisma.$disconnect();
+    process.exit(0);
+});
 
 app.listen(port, () => {
     console.log('Server app listening on port ' + port);
