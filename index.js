@@ -3,7 +3,7 @@
 import * as dotenv from 'dotenv';
 import express from 'express'; 
 import cors from 'cors'; 
-import router from "./routes/start.js"; // the routes 
+import router from "./routes/routes.js"; // the routes 
 import { verifyJwtToken } from './middelwares/middelware.js';
 import { OpenAI } from 'openai'; 
 import prisma from './prisma/prismaClient.js';

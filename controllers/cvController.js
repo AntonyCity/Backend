@@ -1,51 +1,22 @@
-import { PrismaClient } from '@prisma/client';
-import { newMessage } from  '../llm/openaiApi.js';
-import { addToIndex } from '../embedding/pineconeVector.js';
-
-
-const prisma = new PrismaClient();
+import cvService from '../services/cvService.js';
 
 class CvController {
-    
-    
-    async upload (req, res) {
+    async upload(req, res) {
+        try {
+            const data = req.body.pdfText;
 
-        console.log('hey runy')
-        //console.log(req.body.pdfText)
+            const result = await cvService.processAndStoreCV(data);
 
-        let data = req.body.pdfText ;
-        console.log(data)
-        console.log("======================================================")
-
-        let sysPrompt = 'You are the head of human resources at one of the top 10 companies of the world. You have 40 years of experience and are an expert at analyzing and hiring candidate. I wil give you text scrapped from the candidate CV. You do the work mechanically and always answer in a JSON output way, you MUST FOLLOW THIS PATERN `{ "fullname": "", "summary": "", "tags": "", "phone": "", "email": "" }`. If can can not find an information just put "N/A" in it.';
-
-        
-        
-        let result = await newMessage(sysPrompt, data)
-        console.log(result)
-        console.log("======================================================")
-        result = JSON.parse(result.choices[0].message.content.slice(7, -3));
-        console.log(result)
-        console.log("======================================================")
-
-        let uniId = result.fullname.normalize("NFD").replace(/[\u0300-\u036f]/g, '') + new Date().toISOString();
-
-        await prisma.candidate.create({
-            data: {
-                uniId: uniId,
-                name: result.fullname,
-                summary: result.summary,
-                tags: result.tags,
-                phone: result.phone,
-                email: result.email
+            if (result.error) {
+                res.status(500).json({ status: 'error', error: result.error });
+                return;
             }
-        });
 
-        await addToIndex(uniId, result, 'offertocv');
-
-        res.status(200).json({status: result});
-    };
-
-};
+            res.status(200).json({ status: result });
+        } catch (e) {
+            res.status(500).json({ status: 'unexpected error: ' + e });
+        }
+    }
+}
 
 export default new CvController();

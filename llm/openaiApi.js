@@ -18,7 +18,7 @@ async function newMessage (input, data) {
         ],
         model: "gpt-4o-mini"
       });
-      //console.log(completion.choices[0].message);
+      
       return completion;
     } catch (err) {
       console.log("failed: " + err)

@@ -7,6 +7,7 @@ CREATE TABLE `User` (
     `role` VARCHAR(191) NOT NULL DEFAULT 'CLASSIC',
 
     UNIQUE INDEX `User_name_key`(`name`),
+    UNIQUE INDEX `User_token_key`(`token`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -16,7 +17,9 @@ CREATE TABLE `Offer` (
     `filled` BOOLEAN NOT NULL DEFAULT false,
     `title` VARCHAR(191) NOT NULL,
     `content` VARCHAR(191) NOT NULL,
+    `tags` VARCHAR(191) NULL,
     `published` DATETIME(3) NOT NULL,
+    `updatedAt` DATETIME(3) NULL,
     `userId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -25,13 +28,16 @@ CREATE TABLE `Offer` (
 -- CreateTable
 CREATE TABLE `Candidate` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `uniId` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `summary` VARCHAR(191) NOT NULL,
-    `cvfile` VARCHAR(191) NOT NULL,
-    `phone` INTEGER NULL,
+    `summary` TEXT NOT NULL,
+    `cvfile` VARCHAR(191) NULL,
+    `phone` VARCHAR(191) NULL,
+    `tags` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NULL,
-    `cvPath` VARCHAR(191) NOT NULL,
+    `cvPath` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `Candidate_uniId_key`(`uniId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

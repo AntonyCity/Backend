@@ -1,6 +1,6 @@
 import express from 'express';
 import AuthController from '../controllers/authController.js';
-import OffreController from '../controllers/offreController.js';
+import OfferController from '../controllers/offerController.js';
 import UserController from '../controllers/userController.js';
 import cvController from '../controllers/cvController.js';
 import upload from '../utils/multer.js';
@@ -20,15 +20,15 @@ router.get('/', (req, res) => {
 router.post('/login', AuthController.login);
 
 /* User route */
-router.get('/users', UserController.getUsers);
-router.post('/users', UserController.createUser);
+router.get('/users', UserController.show);
+router.post('/users', UserController.create);
 
 
 /* CRUD offres */
-router.post('/offre/add', OffreController.create);
-router.get('/offre/display', OffreController.reads);
-router.put('/offre/update', OffreController.update);
-router.delete('/offre/delete', OffreController.delete);
+router.post('/offre/add', OfferController.create);
+router.get('/offre/display', OfferController.reads);
+router.put('/offre/update', OfferController.update);
+router.delete('/offre/delete', OfferController.delete);
 
 /* CRUD user */
 router.post('/user/add', UserController.create);
