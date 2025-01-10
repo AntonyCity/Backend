@@ -11,6 +11,8 @@
     "allf": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
     "purge": "npx prisma migrate reset --force && npm run allf",
     "test": "test",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate"
     "build": "npm run purge && node index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",

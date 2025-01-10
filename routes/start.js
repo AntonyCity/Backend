@@ -19,6 +19,11 @@ router.get('/', (req, res) => {
 /* Authentification route */
 router.post('/login', AuthController.login);
 
+/* User route */
+router.get('/users', UserController.getUsers);
+router.post('/users', UserController.createUser);
+
+
 /* CRUD offres */
 router.post('/offre/add', OffreController.create);
 router.get('/offre/display', OffreController.reads);
@@ -33,6 +38,7 @@ router.delete('/user/delete', UserController.delete);
 
 /* Manage CV */
 router.post('/cv/upload', cvController.upload);
+
 
 router.use('/test', (req, res) => {
     console.log('test')
