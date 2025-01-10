@@ -27,4 +27,4 @@ dist-ssr
 
 .vercel
 
-/prisma/migrations/
+/src/prisma/migrations/
