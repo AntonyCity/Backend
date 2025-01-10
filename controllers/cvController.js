@@ -43,7 +43,7 @@ class CvController {
 
         await addToIndex(uniId, result, 'offertocv');
 
-        res.status(200).json({message: 'File uploaded and treated successfully.'});
+        res.status(200).json({status: result});
     };
 
 };
