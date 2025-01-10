@@ -15,7 +15,7 @@ model User {
   id Int @id @default(autoincrement())
   name String @unique
   password String
-  token String?
+  token String? @unique
   role String @default("CLASSIC")
   offers Offer[]
 }
@@ -27,7 +27,9 @@ model Offer {
   filled Boolean @default(false)
   title String
   content String
+  tags String ?
   published DateTime
+  updatedAt DateTime?
   userId Int
   publisher User @relation(fields: [userId], references: [id])
   matchs Match[] 
@@ -36,12 +38,14 @@ model Offer {
 //CV loadded in the database
 model Candidate {
   id Int @id @default(autoincrement())
+  uniId String @unique
   name String
-  summary String
-  cvfile String
-  phone Int?
+  summary String @db.Text
+  cvfile String?
+  phone String?
+  tags String
   email String?
-  cvPath String
+  cvPath String?
   matches Match[]
 }
 

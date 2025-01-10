@@ -7,10 +7,13 @@
   "scripts": {
     "dev": "node index.js",
     "uf": "node ./fixtures/userFixture.js",
+    "of": "node ./fixtures/offreFixture.js",
+    "allf": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
+    "purge": "npx prisma migrate reset --force && npm run allf",
     "test": "test",
-    "build": "node ./fixtures/userFixture.js && node index.js",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate"
+    "build": "npm run purge && node index.js"
   },
   "author": "Pierre-Louis aka.Zorgos",
   "license": "ISC",
