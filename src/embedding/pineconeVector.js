@@ -20,8 +20,8 @@ const pc = new Pinecone({
 async function addToIndex(id, data, inx) {
     const results = [];
     let formated = data;
-    console.log(typeof formated)
-    console.log(formated)
+    //console.log(typeof formated)
+    //console.log(formated)
     try {
         const embedding = await openai.embeddings.create({
             model: "text-embedding-3-small",
@@ -41,7 +41,7 @@ async function addToIndex(id, data, inx) {
             }
         });
 
-        console.log("All embeddings:", results);
+        //console.log("All embeddings:", results);
 
         const index = pc.Index(inx);
         await index.upsert(results);
