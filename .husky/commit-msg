@@ -1,0 +1,33 @@
+#!/bin/sh
+echo "" 
+
+if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?: .{1,}$"; then
+    echo "🚫 Aborting commit! 🚫"
+    echo "❌ Votre message de commit est invalide."
+    echo "✅ Format attendu :"
+    echo "   - feat(scope): Ajout d'une nouvelle fonctionnalité"
+    echo "   - fix(scope): Correction d'un bug"
+    echo "   - chore: Maintenance et tâches diverses"
+    echo "   - docs: Mise à jour de la documentation"
+    echo "   - test: Ajout ou modification de tests"
+    echo "   - style: Changement de style (indentation, espaces...)"
+    echo "   - refactor: Réécriture de code sans changement de comportement"
+    echo "   - perf: Amélioration des performances"
+    echo "   - build: Changements impactant le build"
+    echo "   - ci: Modifications du pipeline CI/CD"
+    echo "   - revert: Annulation d'un commit précédent"
+    echo ""
+    echo "💡 Astuce : Utilisez un message clair et concis pour faciliter la compréhension."
+    echo "" 
+    exit 1
+fi
+if ! head -1 "$1" | grep -qE "^.{1,88}$"; then
+    echo "🚫 Aborting commit! 🚫"
+    echo "❌ Votre message de commit est trop long (max 88 caractères)."
+    echo "✂️ Essayez de le raccourcir tout en conservant son sens."
+    echo "" 
+    exit 1
+fi
+
+echo "✅ Commit message valide ! 🚀"
+echo "" 
