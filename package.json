@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
+    "dev": "docker compose up --build",
     "uf": "docker exec -it antony-backend-app node ./src/fixtures/userFixture.js",
     "of": "docker exec -it antony-backend-app node ./src/fixtures/offreFixture.js",
     "allf": "docker exec -it antony-backend-app node ./src/fixtures/userFixture.js && node ./src/fixtures/offreFixture.js",
