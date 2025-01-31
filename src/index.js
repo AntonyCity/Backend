@@ -24,6 +24,7 @@ app.use(express.json());
 
 app.use('/offre', verifyJwtToken);
 app.use('/user', verifyJwtToken);
+app.use('/cv', verifyJwtToken);
 app.use("/", router);
 
 process.on('SIGINT', async () => {

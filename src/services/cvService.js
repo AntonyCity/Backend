@@ -4,7 +4,9 @@ import { addToIndex } from '../embedding/pineconeVector.js';
 
 class CvService {
     async processAndStoreCV(data) {
+        console.log('Processing CV')
         try {
+            
             const sysPrompt = `
                 You are the head of human resources at one of the top 10 companies of the world. 
                 You have 40 years of experience and are an expert at analyzing and hiring candidates. 
@@ -35,6 +37,26 @@ class CvService {
             await addToIndex(uniId, result, 'offertocv');
 
             return result;
+        } catch (e) {
+            return { error: e.message };
+        }
+    }
+
+    async getAllCv() {
+        try {
+            let temp = await prisma.candidate.findMany({
+                select: {
+                    name: true,
+                    summary: true,
+                    cvfile: true,
+                    phone: true,
+                    tags: true,
+                    email: true,
+                    cvPath: true
+                  },
+            });
+             
+            return temp
         } catch (e) {
             return { error: e.message };
         }
