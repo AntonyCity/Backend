@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "uf": "node ./src/fixtures/userFixture.js",
     "of": "node ./src/fixtures/offreFixture.js",
-    "allf": "node ./fixtures/userFixture.js && node ./fixtures/offreFixture.js",
+    "allf": "node ./src/fixtures/userFixture.js && node ./src/fixtures/offreFixture.js",
     "purge": "npx prisma migrate reset --force && npm run allf",
     "test": "test",
     "prisma:migrate": "npx prisma migrate deploy",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
     "prisma": "^5.22.0"
   }
 }
