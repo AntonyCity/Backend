@@ -48,8 +48,8 @@ npm run dev
 ### 5️⃣ Donner les permissions à l'utilisateur MySQL 🛡️
 ```bash
 docker exec -it {CONTAINER_NAME} bash
-mysql -u{ROOT_USERNAME} -p{ROOT_PASSWORD}
-GRANT ALL PRIVILEGES ON *.* TO '{USERNAME}@'%' WITH GRANT OPTION;
+mysql -u{MYSQL_ROOT_USERNAME} -p{MYSQL_ROOT_PASSWORD}
+GRANT ALL PRIVILEGES ON *.* TO '{MYSQL_USER}@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 exit
 ```
