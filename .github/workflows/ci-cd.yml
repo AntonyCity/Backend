@@ -1,0 +1,29 @@
+name: Test CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - ci-cd-test  # Exécute uniquement sur la branche "ci-cd-test"
+
+jobs:
+  test-ci-cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Démarrage du workflow
+        run: echo "Le workflow CI/CD s'exécute sur la branche ci-cd-test !"
+
+      - name: 📂 Cloner le repo
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Simulation de build
+        run: echo "Build en cours... (simulation)"
+
+      - name: ✅ Simulation de tests
+        run: echo "Les tests ont été exécutés avec succès !"
+
+      - name: 🚀 Simulation de déploiement
+        run: echo "Déploiement fictif terminé !"
+
+      - name: 🎉 Fin du workflow
+        run: echo "CI/CD terminé avec succès !"
