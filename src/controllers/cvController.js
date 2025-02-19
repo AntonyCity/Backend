@@ -35,11 +35,31 @@ class CvController {
         try {
             const results = await cvService.getAllCv();
             if (results.error) {
-                res.status(results.status).json({ error: result.error });
+                res.status(results.status).json({ error: results.error });
                 return;
             }
 
             res.status(200).json({ allCandidate: results });
+        } catch (e) {
+            res.status(500).json({ status: 'unexpected error: ' + e });
+        }
+    }
+
+    async getSome(req, res){
+        try {
+            let int = req.body.int
+            if (typeof int !== 'number' || !Number.isInteger(int)) {
+                return res.status(400).json({ error: 'Invalid input: Expected an integer.' });
+            }
+
+            const results = await cvService.fewCv(int);
+
+            if (results.error) {
+                res.status(results.status).json({ error: results.error });
+                return;
+            }
+
+            res.status(200).json({ Candidate: results });
         } catch (e) {
             res.status(500).json({ status: 'unexpected error: ' + e });
         }

@@ -1,5 +1,5 @@
 import prisma from '../../prisma/prismaClient.js';
-import { addToIndex } from '../embedding/pineconeVector.js';
+import pineconeController from '../embedding/pineconeVector.js'
 
 class OfferService {
     async createOffer({ token, title, content }) {
@@ -24,7 +24,7 @@ class OfferService {
 
             const uniId = data.title.normalize("NFD").replace(/[\u0300-\u036f]/g, '') + data.published;
 
-            await addToIndex(uniId, data, 'offertocv');
+            await pineconeController.addToIndex(uniId, data, 'offer');
 
             return { status: 'success' };
         } catch (e) {
@@ -35,6 +35,32 @@ class OfferService {
     async getAllOffers() {
         try {
             return await prisma.offer.findMany();
+        } catch (e) {
+            throw new Error(e.message);
+        }
+    }
+
+    async getName({token, id}){
+        try {
+            if (!id) {
+                return { error: "Offer ID is required.", status: 400 };
+            }
+
+            const user = await prisma.user.findUnique({
+                where: { token },
+            });
+
+            if (!user || user.role === "CLASSIC") {
+                return { error: "You don't have the level to do this operation or must be connected.", status: 403 };
+            }
+
+            const name = await prisma.offer.findUnique({
+                where:  { id },
+                select: title
+            });
+
+            return name
+
         } catch (e) {
             throw new Error(e.message);
         }
@@ -63,6 +89,15 @@ class OfferService {
                 where: { id },
                 data: dataToUpdate,
             });
+
+            const data = await prisma.offer.findUnique({
+                where: { id },
+            })
+
+            const uniId = data.title.normalize("NFD").replace(/[\u0300-\u036f]/g, '') + data.published;
+
+            await pineconeController.addToIndex(uniId, data, 'offer');
+
 
             return { updatedOffer };
         } catch (e) {

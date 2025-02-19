@@ -1,6 +1,6 @@
 import prisma from '../../prisma/prismaClient.js';
 import { newMessage } from '../llm/openaiApi.js';
-import { addToIndex } from '../embedding/pineconeVector.js';
+import pineconeController from '../embedding/pineconeVector.js'
 
 class CvService {
     async processAndStoreCV(data) {
@@ -34,7 +34,7 @@ class CvService {
                 },
             });
 
-            await addToIndex(uniId, result, 'offertocv');
+            await pineconeController.addToIndex(uniId, result, 'cv');
 
             return result;
         } catch (e) {
@@ -57,6 +57,35 @@ class CvService {
             });
              
             return temp
+        } catch (e) {
+            return { error: e.message };
+        }
+    }
+
+    async fewCv(int) {
+        try {
+            console.log('trying')
+            let temp = await prisma.candidate.findMany({
+                select: {
+                    name: true,
+                    summary: true,
+                    cvfile: true,
+                    phone: true,
+                    tags: true,
+                    email: true,
+                    cvPath: true
+                  },
+            });
+            console.table(typeof temp)
+            
+            if (temp.length() > int) {
+                console.log(1)
+                return temp.slice(0, int);
+            } else {
+                console.log(2)
+                return temp
+            }
+            
         } catch (e) {
             return { error: e.message };
         }

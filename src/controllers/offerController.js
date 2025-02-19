@@ -1,4 +1,6 @@
-import offerService from '../services/offerService.js'
+import offerService from '../services/offerService.js';
+import pineconeController from '../embedding/pineconeVector.js';
+
 
 class OfferController {
     async create(req, res) {
@@ -33,12 +35,17 @@ class OfferController {
             const token = req.headers.authorization.split(' ')[1];
             const { id, filled, title, content } = req.body;
 
+            const name = await offerService.getName({token, id})
+            await pineconeController.deleteToIndex(name, offer);
+
             const result = await offerService.updateOffer({ token, id, filled, title, content });
 
             if (result.error) {
                 res.status(result.status).json({ error: result.error });
                 return;
             }
+
+            
 
             res.status(200).json({ status: 'success', updatedOffer: result.updatedOffer });
         } catch (e) {
@@ -50,6 +57,10 @@ class OfferController {
         try {
             const token = req.headers.authorization.split(' ')[1];
             const { id } = req.body;
+
+            const name = await offerService.getName({token, id})
+
+            await pineconeController.deleteToIndex(name, offer);
 
             const result = await offerService.deleteOffer({ token, id });
 
@@ -63,6 +74,8 @@ class OfferController {
             res.status(500).json({ status: 'unexpected error: ' + e });
         }
     }
+
+    
 }
 
 export default new OfferController();

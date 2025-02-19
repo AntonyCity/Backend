@@ -39,6 +39,7 @@ router.delete('/user/delete', UserController.delete);
 /* Manage CV */
 router.post('/cv/upload', cvController.upload);
 router.get('/cv/show', cvController.getAll);
+router.post('/cv/some', cvController.getSome)
 
 
 router.use('/test', (req, res) => {
