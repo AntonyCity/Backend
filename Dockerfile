@@ -2,8 +2,6 @@ FROM node:20-slim
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 COPY package*.json ./
 RUN apt-get update && \
     apt-get install -y openssl && \
@@ -13,6 +11,8 @@ RUN apt-get update && \
 COPY prisma ./prisma
 RUN npx prisma --version
 RUN npx prisma generate
+
+ENV NODE_ENV=production
 
 COPY . .
 
