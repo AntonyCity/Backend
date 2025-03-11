@@ -36,7 +36,7 @@ class OfferController {
             const { id, filled, title, content } = req.body;
 
             const name = await offerService.getName({token, id})
-            await pineconeController.deleteToIndex(name, offer);
+            await pineconeController.deleteToIndex(name, "offer");
 
             const result = await offerService.updateOffer({ token, id, filled, title, content });
 
@@ -60,7 +60,7 @@ class OfferController {
 
             const name = await offerService.getName({token, id})
 
-            await pineconeController.deleteToIndex(name, offer);
+            await pineconeController.deleteToIndex(name, "offer");
 
             const result = await offerService.deleteOffer({ token, id });
 

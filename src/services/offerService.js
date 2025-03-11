@@ -56,7 +56,7 @@ class OfferService {
 
             const name = await prisma.offer.findUnique({
                 where:  { id },
-                select: title
+                select: {title : true}
             });
 
             return name
