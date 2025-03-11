@@ -40,16 +40,16 @@ npm install
 cp .env.example .env
 ```
 
-### 4️⃣ Lancer le projet 🚀
+### 4️⃣ Lancer les services 🚀
 ```bash
-npm run dev
+npm run docker:up
 ```
 
 ### 5️⃣ Donner les permissions à l'utilisateur MySQL 🛡️
 ```bash
 docker exec -it {CONTAINER_NAME} bash
 mysql -u{MYSQL_ROOT_USERNAME} -p{MYSQL_ROOT_PASSWORD}
-GRANT ALL PRIVILEGES ON *.* TO '{MYSQL_USER}@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '{MYSQL_USER}'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 exit
 ```
@@ -64,6 +64,11 @@ npm run prisma:generate
 npm run prisma:init
 ```
 
+### 8️⃣ Lancer l'application 🚀
+```bash
+npm run start
+```
+
 ---
 
 ## 📌 Migration de la base de données
@@ -71,4 +76,23 @@ npm run prisma:init
 Pour effectuer une migration, utilisez la commande suivante :
 ```bash
 npm run prisma:migrate -- {MIGRATION_NAME}
+```
+
+---
+
+## 💻 Développement
+
+Pour lancer l'application en mode développement :
+```bash
+npm run dev
+```
+
+Pour éteindre les services :
+```bash
+npm run docker:down
+```
+
+Pour ajouter des données test :
+```bash
+npm run allf
 ```

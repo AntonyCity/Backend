@@ -34,6 +34,6 @@ process.on('SIGINT', async () => {
 
 app.listen(port, () => {
     console.log('Server app listening on port ' + port);
-    console.log(`http://localhost:${port}`);
+    console.log(`http://${process.env.HOST}:${port}`);
 });
 
